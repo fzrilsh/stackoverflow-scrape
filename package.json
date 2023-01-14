@@ -1,0 +1,27 @@
+{
+    "name": "stackoverflow-scrape",
+    "version": "1.0.0",
+    "description": "Scrape stackoverflow question and answer",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/fzrilsh/stackoverflow-scrape.git"
+    },
+    "keywords": [
+      "stackoverflow"
+    ],
+    "author": "fzrilsh",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/fzrilsh/stackoverflow-scrape/issues"
+    },
+    "homepage": "https://github.com/fzrilsh/stackoverflow-scrape#readme",
+    "dependencies": {
+      "google-it": "^1.6.4",
+      "jsdom": "^21.0.0"
+    }
+  }
+  
