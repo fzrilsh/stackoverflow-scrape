@@ -6,7 +6,9 @@ Query a question and find the answer on stackoverflow
 - [stackoverflow-scrape](#stackoverflow-scrape)
   - [Table of Contents](#table-of-contents)
   - [Usage](#usage)
-    - [For Node.js](#for-nodejs)
+      - [For Node.js](#for-nodejs)
+    - [WARNING](#warning)
+  - [Todo](#todo)
 
 ## Usage
 
@@ -23,10 +25,18 @@ npm install stackoverflow-scrape --save
 this module require nodejs ver ^18.11.0
 
 ```javascript
-var overflow = require("stackoverflow-scrape");
+var stackoverflow = require("stackoverflow-scrape");
 
 (async() => {
-    const fetchForum = await overflow("scraping with jsdom")
+    const fetchForum = await stackoverflow("scraping with jsdom")
+
+    // Or You can use Stackoverflow Link
+    // With the url can speed up getting answers
+    const fetchForum = await stackoverflow("https://stackoverflow.com/questions/25445936/node-js-web-scraping-with-jsdom")
+
     console.log(fetchForum)
 })()
 ```
+
+## Todo
+- Make Array for Multiple Question and Answer
