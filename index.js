@@ -39,14 +39,13 @@ async function stackoverflow(query) {
   const overflow = await fetch(stacklink).then((v) => v.text());
   const { document } = new JSDOM(overflow).window;
   const hdiv = nextDiv(document, "div", (v) => v?.id == "question-header");
-
   var title = hdiv[0].querySelector("h1 > a").textContent;
   var openedForum = hdiv[1].querySelector("time").textContent;
   var modifiedForum = hdiv[1].querySelector("a").textContent;
   var viewer = hdiv[1]
     .querySelector('div[class="flex--item ws-nowrap mb8"]')
     .title.split(" ")[1];
-
+  var upQuestionVote = document.querySelector("div .question").getAttribute("data-score");
   var question = document.querySelectorAll(".postcell .s-prose")[0].textContent;
   var tagquest = Array.from(document.querySelectorAll(".post-taglist li"))
     .map((v) => v.textContent)
@@ -67,14 +66,16 @@ async function stackoverflow(query) {
     ),
   ];
   var answers = Array.from(
-    document.querySelectorAll("#answers .answercell")
+    document.querySelectorAll("#answers")
   ).map((v) => {
     return {
-      answer: v.querySelector(".s-prose").textContent,
-      author: [
-        v.querySelector('span[class="d-none"]').textContent,
-        v.querySelector("img").src,
-      ],
+      answer: v.querySelector(".answercell .s-prose").textContent,
+      upvote: v.querySelector('div[itemprop="upvoteCount"]').getAttribute("data-value"),
+      author: {
+        name: v.querySelector('.answercell span[class="d-none"]').textContent,
+        img: v.querySelector(".answercell img").src,
+        reputation: v.querySelector('.answercell span[class="reputation-score"]').textContent,
+      },
     };
   });
 
@@ -82,6 +83,7 @@ async function stackoverflow(query) {
     title,
     date_opened_question: openedForum,
     date_modified_question: modifiedForum,
+    upvote: upQuestionVote,
     viewer_forum: viewer,
     question,
     question_tag: tagquest,
